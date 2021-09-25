@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity">
+
+    <com.justin.custommaterialchipwidget.MaterialChipSetsContainer
+        android:id="@+id/materialChipSetsContainer"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:background="#B8B8B8"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
