@@ -1,4 +1,4 @@
-package com.justin.custommaterialchipwidget
+package com.justin.materialchipsetwidget
 
 import android.graphics.drawable.Drawable
 import com.google.android.material.shape.MaterialShapeDrawable

@@ -1,4 +1,4 @@
-package com.justin.custommaterialchipwidget
+package com.justin.materialchipsetwidget
 
 import android.content.res.ColorStateList
 

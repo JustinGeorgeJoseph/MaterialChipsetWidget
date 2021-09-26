@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CustomMaterialChipWidget"
 include ':app'
+include ':MaterialChipsetWidget'
+include ':materialchipsetwidget'

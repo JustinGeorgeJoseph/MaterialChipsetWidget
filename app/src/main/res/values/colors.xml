@@ -12,4 +12,5 @@
     <color name="darkGreen">#44EA2A</color>
 
     <color name="selected_blue">#E9165FD3</color>
+    <color name="light_gray">@android:color/darker_gray</color>
 </resources>

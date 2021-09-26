@@ -1,4 +1,4 @@
-package com.justin.custommaterialchipwidget
+package com.justin.materialchipsetwidget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -12,27 +12,11 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 
 
-data class ChipData(val title : String, var isSelected : Boolean = false)
-
-interface ChipSetWidgetListener {
-    fun onChipClicked(position : Int, title : String?, isSelected :Boolean)
-}
-
 class MaterialChipSetWidget @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
 ) : LinearLayout(context, attrs) {
 
     var chipSetWidgetListener : ChipSetWidgetListener? = null
-
-    var dataSet : List<String>? = null
-    set(value) {
-        field = value
-        val list = arrayListOf<ChipData>()
-        value?.forEach {
-            list.add(ChipData(it))
-        }
-        chipDataList = list
-    }
 
     var chipDataSet : ChipSetData? = null
         set(value) {
@@ -49,6 +33,10 @@ class MaterialChipSetWidget @JvmOverloads constructor(
             field = value
             renderContents(value)
         }
+
+    var textColorUnselected: Int = ContextCompat.getColor(context, R.color.light_gray)
+    var textColorSelected: Int = ContextCompat.getColor(context, R.color.light_gray)
+    var dividerColorUnselected = ContextCompat.getColor(context, R.color.light_gray)
 
 
     init {
@@ -72,7 +60,7 @@ class MaterialChipSetWidget @JvmOverloads constructor(
 
     private fun getSelectedChip(dataSet: List<ChipData>): ChipData? {
         dataSet.let {
-            var chipData : ChipData ? = null
+            var chipData : ChipData? = null
             for(content in it){
                 if (content.isSelected) {
                     chipData = content
@@ -91,8 +79,13 @@ class MaterialChipSetWidget @JvmOverloads constructor(
             val textView = TextView(context).apply {
                 text = dataSet[i].title
                 gravity = Gravity.CENTER
-                //TODO remove this hardcoded code
-                setPadding(10,5,10,5)
+                setTextColor(textColorUnselected)
+                setPadding(
+                    resources.getDimension(R.dimen.chipTextStartPadding).toInt(),
+                    resources.getDimension(R.dimen.chipTextTopPadding).toInt(),
+                    resources.getDimension(R.dimen.chipTextEndPadding).toInt(),
+                    resources.getDimension(R.dimen.chipTextBottomPadding).toInt(),
+                )
                 getForegroundRipple(this)
                 isClickable = true
                 setOnClickListener {
@@ -104,9 +97,12 @@ class MaterialChipSetWidget @JvmOverloads constructor(
 
             if ( i <dataSet.size-1){
                 val view = View(context).apply {
-                    setBackgroundColor(ContextCompat.getColor(context,android.R.color.darker_gray))
-                    //TODO remove this hardcoded code
-                    layoutParams = ViewGroup.LayoutParams(3,30)
+                    setBackgroundColor(dividerColorUnselected)
+                    layoutParams =
+                        ViewGroup.LayoutParams(
+                            resources.getDimension(R.dimen.chipDividerWidth).toInt(),
+                            resources.getDimension(R.dimen.chipDividerHeight).toInt(),
+                        )
                     gravity = Gravity.CENTER_VERTICAL
                 }
                 addView(view)
@@ -121,6 +117,9 @@ class MaterialChipSetWidget @JvmOverloads constructor(
                     this[i].apply {
                         if (this.title == value ) {
                             this.isSelected = !this.isSelected
+                            chipDataSet?.let {
+                                chipSetWidgetListener?.onChipClicked(it.position,this.title,this.isSelected)
+                            }
                         } else {
                             this.isSelected = false
                         }
@@ -140,6 +139,7 @@ class MaterialChipSetWidget @JvmOverloads constructor(
                 if (child is TextView) {
                     if (child.text == it.title) {
                         child.visibility = View.VISIBLE
+                        child.setTextColor(textColorSelected)
                     } else {
                         child.visibility = View.GONE
                     }
@@ -151,12 +151,9 @@ class MaterialChipSetWidget @JvmOverloads constructor(
             for (i in 0 until this.childCount) {
                 val child = this.getChildAt(i)
                 child.visibility = View.VISIBLE
-
+                if (child is TextView)
+                    child.setTextColor(textColorUnselected)
             }
-        }
-
-        chipDataSet?.let {
-            chipSetWidgetListener?.onChipClicked(it.position,chipData?.title,chipData!=null)
         }
         this.invalidate()
     }

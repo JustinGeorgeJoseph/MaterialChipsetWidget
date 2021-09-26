@@ -8,11 +8,11 @@
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
-    <com.justin.custommaterialchipwidget.MaterialChipSetsContainer
+    <com.justin.materialchipsetwidget.MaterialChipSetsContainer
         android:id="@+id/materialChipSetsContainer"
         android:layout_width="match_parent"
         android:scrollbars="none"
-        android:background="#B8B8B8"
+        android:padding="10dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
