@@ -2,6 +2,7 @@ package com.justin.materialchipsetwidget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -155,7 +156,6 @@ class MaterialChipSetWidget @JvmOverloads constructor(
                     child.setTextColor(textColorUnselected)
             }
         }
-        this.invalidate()
     }
 
     private fun getForegroundRipple(textView: TextView){
