@@ -48,8 +48,8 @@ Initally there won't be any content you have add those contents dynamically.
 ```
 android:scrollbars="none" // sets whether a horizontal scrollbar is required or not.
 ```
-###Initalize MaterialChipsetWidget with chips
-####Create a list of data that should be shown in the widget
+### Initalize MaterialChipsetWidget with chips
+#### Create a list of data that should be shown in the widget
 ```
     private fun createDataSet(): List<List<String>> {
         val arrayTime = arrayListOf("Recent", "2000s", "90s", "Old")
@@ -59,7 +59,7 @@ android:scrollbars="none" // sets whether a horizontal scrollbar is required or 
         return arrayListOf(arrayPurchaseMode, arrayTime, arrayGenre, arrayRating)
     }
 ```
-####Initialize the widget with colors and dataset
+#### Initialize the widget with colors and dataset
 ```
 findViewById<MaterialChipSetsContainer>(R.id.materialChipSetsContainer).apply {
 
@@ -80,7 +80,7 @@ findViewById<MaterialChipSetsContainer>(R.id.materialChipSetsContainer).apply {
         }
 ```
 
-###MaterialChipsetWidgetListener
+### MaterialChipsetWidgetListener
 ```
 MaterialChipsetWidgetListener {
 
