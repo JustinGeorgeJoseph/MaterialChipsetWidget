@@ -11,3 +11,21 @@ A MaterialChipSetWidget is used to hold list of chipsets and each chipset contai
 <p align="center">
 <img src="/demo/header_image.png" />
 </p>
+
+## Including in your project 
+[![Jitpack](https://jitpack.io/v/JustinGeorgeJoseph/MaterialChipsetWidget.svg)](https://jitpack.io/#JustinGeorgeJoseph/MaterialChipsetWidget/Tag)
+### Gradle 
+Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
+```gradle
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+```
+And add a dependency code to your **module**'s `build.gradle` file.
+```gradle
+dependencies {
+    implementation "com.github.skydoves:colorpickerview:2.2.4"
+}
+```
