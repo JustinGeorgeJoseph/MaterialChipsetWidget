@@ -9,5 +9,5 @@ A MaterialChipSetWidget is used to hold list of chipsets and each chipset contai
 </p> <br>
 
 <p align="center">
-<img src="/demo/header_image.png" width="31%"/>
+<img src="/demo/header_image.png" />
 </p>
