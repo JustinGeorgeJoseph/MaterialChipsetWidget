@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 
-class ShapeRender(val shape: Shape) {
+class ShapeRender(private val shape: Shape) {
 
     fun getDrawable(): Drawable {
 

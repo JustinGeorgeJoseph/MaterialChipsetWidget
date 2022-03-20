@@ -18,6 +18,7 @@ class MaterialChipSetWidget @JvmOverloads constructor(
 ) : LinearLayout(context, attrs) {
 
     var chipSetWidgetListener : ChipSetWidgetListener? = null
+    var chipSelectionGroup:String=""
 
     var chipDataSet : ChipSetData? = null
         set(value) {
@@ -119,7 +120,7 @@ class MaterialChipSetWidget @JvmOverloads constructor(
                         if (this.title == value ) {
                             this.isSelected = !this.isSelected
                             chipDataSet?.let {
-                                chipSetWidgetListener?.onChipClicked(it.position,this.title,this.isSelected)
+                                chipSetWidgetListener?.onChipClicked(it.position,chipSelectionGroup,this.title,this.isSelected)
                             }
                         } else {
                             this.isSelected = false

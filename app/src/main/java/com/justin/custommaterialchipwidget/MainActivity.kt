@@ -16,24 +16,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         findViewById<MaterialChipSetsContainer>(R.id.materialChipSetsContainer).apply {
 
-            chipSetSolidColorUnselected = ContextCompat.getColor(context, android.R.color.white)
-            chipSetSolidColorSelected = ContextCompat.getColor(context, R.color.selected_blue)
-            chipSetStrokeWidth = Utils.convertDpToPx(this@MainActivity, 2)
+            chipSetSolidColorUnselected = ContextCompat.getColor(context, android.R.color.black)
+            chipSetSolidColorSelected = ContextCompat.getColor(context, R.color.green)
+            chipSetStrokeWidth = Utils.convertDpToPx(this@MainActivity, 3)
             chipSetStrokeColorUnselected =
-                ColorStateList.valueOf(ContextCompat.getColor(context, R.color.light_gray))
+                ColorStateList.valueOf(ContextCompat.getColor(context, R.color.green))
             chipSetStrokeColorSelected =
-                ColorStateList.valueOf(ContextCompat.getColor(context, R.color.selected_blue))
+                ColorStateList.valueOf(ContextCompat.getColor(context, R.color.green))
 
-            chipTextColorUnselected = ContextCompat.getColor(context, android.R.color.black)
+            chipTextColorUnselected = ContextCompat.getColor(context, android.R.color.white)
             chipTextColorSelected = ContextCompat.getColor(context, android.R.color.white)
             chipTextDividerColorUnselected =
-                ContextCompat.getColor(context, android.R.color.darker_gray)
+                ContextCompat.getColor(context, R.color.green)
 
             dataSet = createDataSet()
 
             listener = object: MaterialChipsetWidgetListener {
-                override fun onChipSelectionChanged(name: String?, checked: Boolean) {
+
+                override fun onChipSelectionChanged(
+                    name: String?,
+                    chipSelectionGroup: String,
+                    checked: Boolean,
+                ) {
                     Toast.makeText(this@MainActivity,"onChipSelectionChanged --> $name || $checked",Toast.LENGTH_SHORT).show()
+
                 }
 
                 override fun onChipsetsResetClicked() {

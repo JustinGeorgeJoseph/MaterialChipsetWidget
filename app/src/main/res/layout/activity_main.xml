@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@color/black_04"
+    android:paddingStart="20dp"
+    android:paddingTop="50dp"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:text="MaterialChipSetWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <com.justin.materialchipsetwidget.MaterialChipSetsContainer
         android:id="@+id/materialChipSetsContainer"
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:scrollbars="none"
         android:padding="10dp"
         android:layout_height="wrap_content"/>

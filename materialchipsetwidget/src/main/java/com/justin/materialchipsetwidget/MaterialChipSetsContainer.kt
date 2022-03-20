@@ -31,7 +31,7 @@ class MaterialChipSetsContainer @JvmOverloads constructor(
             chipSetDataList = chipSetList
         }
 
-    private var chipSetDataList: List<ChipSetData>? = null
+     private var chipSetDataList: List<ChipSetData>? = null
         set(value) {
             field = value
             refreshWidgetViews(field)
@@ -53,6 +53,7 @@ class MaterialChipSetsContainer @JvmOverloads constructor(
     var chipTextColorUnselected: Int = ContextCompat.getColor(context, R.color.light_gray)
     var chipTextColorSelected: Int = ContextCompat.getColor(context, R.color.light_gray)
     var chipTextDividerColorUnselected = ContextCompat.getColor(context, R.color.light_gray)
+    val chipRadius:Float by lazy { Utils.convertDpToPx(context,48)}
 
     @DrawableRes
     var closeButtonIcon: Int = R.drawable.ic_baseline_close_24
@@ -82,7 +83,7 @@ class MaterialChipSetsContainer @JvmOverloads constructor(
         }
 
         containerLayout.addView(getCloseButton())
-
+        chipSetWidgetList.clear()
         chipSetWidgetList.addAll(getMaterialChipSetWidgets(context, dataSet))
         chipSetWidgetList.forEach { chipSetWidget ->
             containerLayout.addView(chipSetWidget)
@@ -128,21 +129,24 @@ class MaterialChipSetsContainer @JvmOverloads constructor(
                     }
                 }
                 layoutParams = params
+                this.chipSelectionGroup=dataSet[index].chipSelectionGroup
                 this.chipSetWidgetListener = object : ChipSetWidgetListener {
-                    override fun onChipClicked(position: Int, title: String?, isSelected: Boolean) {
-                        updateChipsetWidgetStatus(position, isSelected)
-                        sendChipStatusReturn(title,isSelected)
+                    override fun onChipClicked(position: Int,chipSelectionGroup:String, title: String?, isSelected: Boolean) {
+                            updateChipsetWidgetStatus(position, isSelected)
+                            sendChipStatusReturn(title, chipSelectionGroup, isSelected)
                     }
                 }
                 this.chipDataSet = dataSet[index]
             }
+            materialChipSetWidget.measure(0,0)
+            materialChipSetWidget.background = getBackGroundDrawable(dataSet[index].isSelected)
 
             widgetList.add(materialChipSetWidget)
         }
         return widgetList
     }
 
-    private fun sendChipStatusReturn(title : String?, selected: Boolean) = listener?.onChipSelectionChanged(title,selected)
+    private fun sendChipStatusReturn(title : String?,chipSelectionGroup:String, selected: Boolean) = listener?.onChipSelectionChanged(title,chipSelectionGroup,selected)
 
     private fun updateChipsetWidgetStatus(position: Int, selected: Boolean) {
         chipSetWidgetList[position].background = getBackGroundDrawable(selected)
@@ -220,12 +224,19 @@ class MaterialChipSetsContainer @JvmOverloads constructor(
         solidColor: Int, strokeColor: ColorStateList,
         strokeWidth: Float,
     ): Drawable {
-        val rectangleShape = RectangleShape(radius = resources.getDimension(R.dimen.radius)).apply {
+        val rectangleShape = RectangleShape(radius = chipRadius).apply {
             this.backGroundTintColor = solidColor
             this.strokeWidth = strokeWidth
             this.strokeColor = strokeColor
         }
         return ShapeRender(rectangleShape).getDrawable()
+    }
+
+    public fun updateViews(chipSetDataList:List<ChipSetData>){
+        this.chipSetDataList=chipSetDataList
+    }
+    public fun getChipSetDataList(): List<ChipSetData>? {
+        return this.chipSetDataList
     }
 
 }
