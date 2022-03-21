@@ -1,6 +1,6 @@
 <h1 align="center">MaterialChipSetWidget</h1></br>
 <p align="center">
-A MaterialChipSetWidget is used to hold list of chipsets and each chipset contains a list of values.
+A MaterialChipSetWidget is used to hold multiple chipsets U+1F929 and each chipset holds multiple values.
 </p>
 
 <p align="center">
